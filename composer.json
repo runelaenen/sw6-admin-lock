@@ -1,0 +1,27 @@
+{
+    "name": "laenen/admin-lock",
+    "description": "Admin lock for Shopware 6.6 customers and orders.",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "version": "6.0.0",
+    "require": {
+        "php": ">=8.2",
+        "shopware/core": "~6.6.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaenenAdminLock\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "LaenenAdminLock\\LaenenAdminLock",
+        "label": {
+            "en-GB": "Laenen Admin Lock",
+            "de-DE": "Laenen Admin Lock"
+        },
+        "description": {
+            "en-GB": "Prevents two administration users from editing the same customer or order at the same time.",
+            "de-DE": "Verhindert, dass zwei Administratoren gleichzeitig denselben Kunden oder dieselbe Bestellung bearbeiten."
+        }
+    }
+}

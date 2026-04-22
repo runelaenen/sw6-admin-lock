@@ -1,0 +1,12 @@
+{% block sw_order_detail_content_tabs %}
+    <lae-lock-bar
+        v-if="orderId"
+        :state="laeLockState"
+        :loading="laeLockBusy"
+        @lock="onLaeLockClick"
+        @unlock="onLaeUnlockClick"
+        @force-unlock="onLaeForceUnlockClick"
+        @refresh="onLaeRefreshClick" />
+
+    {% parent %}
+{% endblock %}

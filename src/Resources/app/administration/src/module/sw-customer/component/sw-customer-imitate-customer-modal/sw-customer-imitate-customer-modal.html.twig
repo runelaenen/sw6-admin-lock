@@ -1,0 +1,9 @@
+{% block sw_customer_imitate_customer_modal_text %}
+    <sw-alert
+        variant="info"
+        :closable="false">
+        {{ $tc('lae-admin-lock.common.impersonationHint') }}
+    </sw-alert>
+
+    {% parent %}
+{% endblock %}

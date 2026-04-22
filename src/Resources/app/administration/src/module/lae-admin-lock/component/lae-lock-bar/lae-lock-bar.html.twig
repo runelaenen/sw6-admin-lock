@@ -1,0 +1,113 @@
+{% block lae_lock_bar %}
+<div class="lae-lock-bar">
+
+    {# IDLE - no lock yet #}
+    <sw-alert
+        v-if="variant === 'idle'"
+        variant="info"
+        :closable="false"
+        :title="$tc('lae-admin-lock.bar.idleTitle')">
+        {{ $tc('lae-admin-lock.bar.idleHint') }}
+
+        <template #actions>
+            <sw-button
+                variant="primary"
+                size="small"
+                :is-loading="loading"
+                :disabled="loading"
+                @click="emitLock">
+                {{ $tc('lae-admin-lock.bar.lockBtn') }}
+            </sw-button>
+        </template>
+    </sw-alert>
+
+    {# OWNED BY ME, THIS SESSION #}
+    <sw-alert
+        v-else-if="variant === 'owned'"
+        variant="success"
+        :closable="false"
+        :title="$tc('lae-admin-lock.bar.ownedTitle')">
+        <p>{{ $tc('lae-admin-lock.bar.ownedHint', 0, { until: formattedExpiresAt }) }}</p>
+
+        <template #actions>
+            <sw-button
+                variant="ghost"
+                size="small"
+                :is-loading="loading"
+                :disabled="loading"
+                @click="emitUnlock">
+                {{ $tc('lae-admin-lock.bar.unlockBtn') }}
+            </sw-button>
+            <sw-button
+                variant="ghost"
+                size="small"
+                :is-loading="loading"
+                :disabled="loading"
+                @click="emitRefresh">
+                {{ $tc('lae-admin-lock.bar.refreshBtn') }}
+            </sw-button>
+        </template>
+    </sw-alert>
+
+    {# OWNED BY ME, ANOTHER TAB #}
+    <sw-alert
+        v-else-if="variant === 'ownedElsewhere'"
+        variant="warning"
+        :closable="false"
+        :title="$tc('lae-admin-lock.bar.ownedElsewhereTitle')">
+        {{ $tc('lae-admin-lock.bar.ownedElsewhereHint') }}
+
+        <template #actions>
+            <sw-button
+                variant="primary"
+                size="small"
+                :is-loading="loading"
+                :disabled="loading"
+                @click="emitLock">
+                {{ $tc('lae-admin-lock.bar.takeOverHereBtn') }}
+            </sw-button>
+            <sw-button
+                variant="ghost"
+                size="small"
+                :is-loading="loading"
+                :disabled="loading"
+                @click="emitRefresh">
+                {{ $tc('lae-admin-lock.bar.refreshBtn') }}
+            </sw-button>
+        </template>
+    </sw-alert>
+
+    {# FOREIGN LOCK #}
+    <sw-alert
+        v-else
+        variant="warning"
+        :closable="false"
+        :title="$tc('lae-admin-lock.bar.foreignTitle', 0, { owner: ownerLabel })">
+        <p>{{ $tc('lae-admin-lock.bar.foreignHint', 0, { since: formattedLockedAt, until: formattedExpiresAt }) }}</p>
+        <p v-if="state.note" class="lae-lock-bar__note">
+            <strong>{{ $tc('lae-admin-lock.bar.note') }}:</strong> {{ state.note }}
+        </p>
+
+        <template #actions>
+            <sw-button
+                variant="ghost"
+                size="small"
+                :is-loading="loading"
+                :disabled="loading"
+                @click="emitRefresh">
+                {{ $tc('lae-admin-lock.bar.refreshBtn') }}
+            </sw-button>
+            <sw-button
+                v-if="canForceUnlock"
+                variant="danger"
+                size="small"
+                :is-loading="loading"
+                :disabled="loading"
+                @click="emitForceUnlock">
+                {{ $tc('lae-admin-lock.bar.forceUnlockBtn') }}
+            </sw-button>
+        </template>
+    </sw-alert>
+
+</div>
+{% endblock %}

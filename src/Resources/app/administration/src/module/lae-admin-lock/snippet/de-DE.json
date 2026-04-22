@@ -1,0 +1,63 @@
+{
+  "lae-admin-lock": {
+    "common": {
+      "anotherAdmin": "ein anderer Administrator",
+      "lockedByAnotherAdmin": "Dieser Datensatz ist aktuell von {owner} gesperrt.",
+      "lockedByCurrentUserOtherSession": "Du hast diesen Datensatz bereits in einem anderen Tab oder einer anderen Sitzung gesperrt.",
+      "acquireFailed": "Die Bearbeitungssperre konnte nicht geprüft werden. Bitte Seite neu laden.",
+      "lostLock": "Die Bearbeitungssperre ist während der Bearbeitung verloren gegangen. Lokale Änderungen wurden verworfen, um Konflikte zu vermeiden.",
+      "forceReleaseSuccess": "Sperre entfernt.",
+      "forceReleaseFailed": "Sperre konnte nicht entfernt werden.",
+      "impersonationHint": "Das Imitieren eines Kunden erstellt oder entfernt keine Administrations-Bearbeitungssperre. Die Sperre läuft automatisch ab, sobald die Detailseite keine Heartbeats mehr sendet."
+    },
+    "bar": {
+      "idleTitle": "Dieser Datensatz ist nicht gesperrt",
+      "idleHint": "Sperre den Datensatz, bevor du ihn bearbeitest, damit andere Admins sehen, dass er in Bearbeitung ist.",
+      "lockBtn": "Zur Bearbeitung sperren",
+      "ownedTitle": "Du hast diesen Datensatz gesperrt",
+      "ownedHint": "Sperre aktiv bis {until}. Klicke auf Entsperren, wenn du fertig bist.",
+      "unlockBtn": "Entsperren",
+      "ownedElsewhereTitle": "Du hältst die Sperre in einem anderen Tab",
+      "ownedElsewhereHint": "Übernimm die Sperre hier, um in diesem Tab zu bearbeiten.",
+      "takeOverHereBtn": "Hier übernehmen",
+      "foreignTitle": "Gesperrt von {owner}",
+      "foreignHint": "Gesperrt seit {since}, läuft ab {until}.",
+      "note": "Notiz",
+      "forceUnlockBtn": "Sperre erzwingen aufheben",
+      "refreshBtn": "Aktualisieren"
+    },
+    "module": {
+      "title": "Bearbeitungssperren",
+      "description": "Aktuell aktive Administrations-Bearbeitungssperren."
+    },
+    "overview": {
+      "title": "Aktive Bearbeitungssperren",
+      "refresh": "Aktualisieren",
+      "loadFailed": "Aktive Bearbeitungssperren konnten nicht geladen werden.",
+      "emptyTitle": "Keine aktiven Bearbeitungssperren",
+      "emptySubline": "Aktuell ist kein Kunde oder keine Bestellung gesperrt.",
+      "colEntity": "Typ",
+      "colEntityId": "Datensatz",
+      "colOwner": "Gesperrt von",
+      "colLockedAt": "Gesperrt am",
+      "colExpiresAt": "Läuft ab",
+      "colNote": "Notiz",
+      "entity": {
+        "customer": "Kunde",
+        "order": "Bestellung"
+      }
+    },
+    "permissions": {
+      "title": "Bearbeitungssperren",
+      "viewer": "Aktive Sperren anzeigen",
+      "force_unlock": "Sperren erzwingen aufheben"
+    }
+  },
+  "sw-privileges": {
+    "permissions": {
+      "lae_admin_lock": {
+        "label": "Bearbeitungssperren"
+      }
+    }
+  }
+}

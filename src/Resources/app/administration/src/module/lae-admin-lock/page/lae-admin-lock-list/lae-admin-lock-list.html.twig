@@ -1,0 +1,77 @@
+{% block lae_admin_lock_list %}
+<sw-page class="lae-admin-lock-list">
+
+    {% block lae_admin_lock_list_smart_bar_header %}
+        <template #smart-bar-header>
+            <h2>{{ $tc('lae-admin-lock.overview.title') }}</h2>
+        </template>
+    {% endblock %}
+
+    {% block lae_admin_lock_list_smart_bar_actions %}
+        <template #smart-bar-actions>
+            <sw-button
+                variant="ghost"
+                :is-loading="isLoading"
+                @click="loadLocks(false)">
+                {{ $tc('lae-admin-lock.overview.refresh') }}
+            </sw-button>
+        </template>
+    {% endblock %}
+
+    {% block lae_admin_lock_list_content %}
+        <template #content>
+            <div class="lae-admin-lock-list__content">
+
+                <sw-empty-state
+                    v-if="!isLoading && locks.length === 0"
+                    :title="$tc('lae-admin-lock.overview.emptyTitle')"
+                    :subline="$tc('lae-admin-lock.overview.emptySubline')"
+                    icon="regular-lock-open" />
+
+                <sw-data-grid
+                    v-else
+                    :data-source="locks"
+                    :columns="columns"
+                    :show-selection="false"
+                    :show-actions="canForceUnlock"
+                    :is-loading="isLoading"
+                    :plain-appearance="true"
+                    identifier="lae-admin-lock">
+
+                    <template #column-entityName="{ item }">
+                        <span class="lae-admin-lock-list__entity-name">
+                            {{ $tc('lae-admin-lock.overview.entity.' + item.entityName) }}
+                        </span>
+                    </template>
+
+                    <template #column-entityId="{ item }">
+                        <router-link v-if="detailRouterLink(item)" :to="detailRouterLink(item)">
+                            {{ item.entityId }}
+                        </router-link>
+                        <span v-else>{{ item.entityId }}</span>
+                    </template>
+
+                    <template #column-lockedAt="{ item }">
+                        {{ formatTimestamp(item.lockedAt) }}
+                    </template>
+
+                    <template #column-expiresAt="{ item }">
+                        {{ formatTimestamp(item.expiresAt) }}
+                    </template>
+
+                    <template #actions="{ item }">
+                        <sw-context-menu-item
+                            v-if="canForceUnlock"
+                            variant="danger"
+                            @click="forceUnlock(item)">
+                            {{ $tc('lae-admin-lock.bar.forceUnlockBtn') }}
+                        </sw-context-menu-item>
+                    </template>
+
+                </sw-data-grid>
+            </div>
+        </template>
+    {% endblock %}
+
+</sw-page>
+{% endblock %}

@@ -1,0 +1,63 @@
+{
+  "lae-admin-lock": {
+    "common": {
+      "anotherAdmin": "another admin",
+      "lockedByAnotherAdmin": "This record is currently locked by {owner}.",
+      "lockedByCurrentUserOtherSession": "You already locked this record in another browser tab or session.",
+      "acquireFailed": "The edit lock could not be checked. Reload the page and try again.",
+      "lostLock": "You lost the edit lock while editing. Local changes were discarded to prevent conflicts.",
+      "forceReleaseSuccess": "Lock removed.",
+      "forceReleaseFailed": "Could not remove the lock.",
+      "impersonationHint": "Customer impersonation does not acquire or release the administration edit lock. The lock expires automatically when the admin detail page stops sending heartbeats."
+    },
+    "bar": {
+      "idleTitle": "This record is not locked",
+      "idleHint": "Lock it before editing so other admins know it is in use.",
+      "lockBtn": "Lock for editing",
+      "ownedTitle": "You have this record locked",
+      "ownedHint": "Lock active until {until}. Click Unlock when you are done so other admins can edit.",
+      "unlockBtn": "Unlock",
+      "ownedElsewhereTitle": "You hold this lock in another tab",
+      "ownedElsewhereHint": "Take the lock over here to edit in this tab.",
+      "takeOverHereBtn": "Take over here",
+      "foreignTitle": "Locked by {owner}",
+      "foreignHint": "Locked since {since}, expires {until}.",
+      "note": "Note",
+      "forceUnlockBtn": "Force unlock",
+      "refreshBtn": "Refresh"
+    },
+    "module": {
+      "title": "Edit locks",
+      "description": "Currently active administration edit locks."
+    },
+    "overview": {
+      "title": "Active edit locks",
+      "refresh": "Refresh",
+      "loadFailed": "Could not load active edit locks.",
+      "emptyTitle": "No active edit locks",
+      "emptySubline": "No customer or order is currently locked for editing.",
+      "colEntity": "Type",
+      "colEntityId": "Record",
+      "colOwner": "Locked by",
+      "colLockedAt": "Locked at",
+      "colExpiresAt": "Expires",
+      "colNote": "Note",
+      "entity": {
+        "customer": "Customer",
+        "order": "Order"
+      }
+    },
+    "permissions": {
+      "title": "Edit locks",
+      "viewer": "View active edit locks",
+      "force_unlock": "Force unlock records"
+    }
+  },
+  "sw-privileges": {
+    "permissions": {
+      "lae_admin_lock": {
+        "label": "Edit locks"
+      }
+    }
+  }
+}
