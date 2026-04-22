@@ -6,7 +6,7 @@ Administration admin lock for **Shopware 6.6.10.15**, scoped to two entities:
 - `order`
 
 The plugin prevents two CSRs from making conflicting changes to the same record.
-It is built for the PartsTree workflow: explicit lock acquisition, lock that
+It is built for the following workflow: explicit lock acquisition, lock that
 **survives save**, supervisor force-unlock, and a small dashboard listing all
 currently held locks.
 
