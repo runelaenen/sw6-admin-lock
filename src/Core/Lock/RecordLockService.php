@@ -9,6 +9,7 @@ use Doctrine\DBAL\ParameterType;
 use Shopware\Core\Framework\Api\Context\AdminApiSource;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\Uuid\Uuid;
+use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
@@ -26,7 +27,8 @@ final class RecordLockService
 {
     public const HEADER_NAME = 'sw-lae-admin-lock-token';
 
-    public const TTL_SECONDS = 1800; // 30 minutes
+    public const TTL_SECONDS_DEFAULT = 1800;
+    private const CONFIG_KEY_TTL_MINUTES = 'LaenenAdminLock.config.lockTtlMinutes';
     public const HEARTBEAT_INTERVAL_SECONDS = 60;
     public const STATUS_POLL_INTERVAL_SECONDS = 15;
 
@@ -48,8 +50,17 @@ final class RecordLockService
     /** @var array<string, string> */
     private array $userLabelCache = [];
 
-    public function __construct(private readonly Connection $connection)
+    public function __construct(
+        private readonly Connection $connection,
+        private readonly SystemConfigService $systemConfigService,
+    ) {
+    }
+
+    private function getTtlSeconds(): int
     {
+        $minutes = $this->systemConfigService->getInt(self::CONFIG_KEY_TTL_MINUTES);
+
+        return max($minutes, 5) * 60;
     }
 
     // ---------------------------------------------------------------------
@@ -91,7 +102,7 @@ final class RecordLockService
         $userLabel = $this->resolveUserLabel($userIdBytes);
 
         $now = $this->utcNow();
-        $expires = $now->modify('+' . self::TTL_SECONDS . ' seconds');
+        $expires = $now->modify('+' . $this->getTtlSeconds() . ' seconds');
         $nowS = $this->fmt($now);
         $expiresS = $this->fmt($expires);
         $note = $note !== null ? mb_substr(trim($note), 0, 255) : null;
@@ -155,7 +166,7 @@ final class RecordLockService
         $ownerToken = $this->normalizeOwnerToken($ownerToken);
         $idBytes = $this->idBytes($entityId);
         $now = $this->utcNow();
-        $expires = $now->modify('+' . self::TTL_SECONDS . ' seconds');
+        $expires = $now->modify('+' . $this->getTtlSeconds() . ' seconds');
 
         // Pure UPDATE fast path. Affected rows = 0 means the lock was lost
         // (taken over, force-released or expired). The caller decides what to do.
@@ -448,7 +459,7 @@ final class RecordLockService
             'lockedAt' => null,
             'heartbeatAt' => null,
             'expiresAt' => null,
-            'ttlSeconds' => self::TTL_SECONDS,
+            'ttlSeconds' => $this->getTtlSeconds(),
             'heartbeatIntervalSeconds' => self::HEARTBEAT_INTERVAL_SECONDS,
             'statusPollIntervalSeconds' => self::STATUS_POLL_INTERVAL_SECONDS,
             'canForceRelease' => $canForce,

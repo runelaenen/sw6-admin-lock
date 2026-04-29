@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Lock settings</title>
+        <title lang="de-DE">Sperreinstellungen</title>
+
+        <input-field type="int">
+            <name>lockTtlMinutes</name>
+            <label>Lock timeout (minutes)</label>
+            <label lang="de-DE">Sperr-Timeout (Minuten)</label>
+            <helpText>How long a lock remains active without a heartbeat before it expires automatically.</helpText>
+            <helpText lang="de-DE">Wie lange eine Sperre ohne Heartbeat aktiv bleibt, bevor sie automatisch abläuft.</helpText>
+            <defaultValue>30</defaultValue>
+            <min>5</min>
+            <max>120</max>
+        </input-field>
+    </card>
+</config>

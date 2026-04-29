@@ -85,7 +85,10 @@ Component.register('lae-admin-lock-list', {
         formatTimestamp(value) {
             if (!value) return '';
             try {
-                return Shopware.Utils.format.dateTime(new Date(value));
+                return Shopware.Filter.getByName('date')(value, {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                });
             } catch (e) {
                 return value;
             }
