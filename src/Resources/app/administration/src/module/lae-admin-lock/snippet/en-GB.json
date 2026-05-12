@@ -54,9 +54,11 @@
     }
   },
   "sw-privileges": {
-    "permissions": {
+    "additional_permissions": {
       "lae_admin_lock": {
-        "label": "Edit locks"
+        "label": "Admin locks",
+        "viewer": "View active edit locks",
+        "force_unlock": "Force unlock records"
       }
     }
   }

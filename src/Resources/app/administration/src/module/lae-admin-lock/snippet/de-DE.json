@@ -54,9 +54,11 @@
     }
   },
   "sw-privileges": {
-    "permissions": {
+    "additional_permissions": {
       "lae_admin_lock": {
-        "label": "Bearbeitungssperren"
+        "label": "Bearbeitungssperren",
+        "viewer": "Aktive Sperren anzeigen",
+        "force_unlock": "Sperren erzwingen aufheben"
       }
     }
   }
