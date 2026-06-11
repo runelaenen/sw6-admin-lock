@@ -1,11 +1,11 @@
 {
     "name": "laenen/sw6-admin-lock",
-    "description": "Admin lock for Shopware 6.6 customers and orders.",
+    "description": "Admin lock for Shopware 6.7 customers and orders.",
     "type": "shopware-platform-plugin",
     "license": "proprietary",
     "require": {
         "php": ">=8.2",
-        "shopware/core": "~6.6.10"
+        "shopware/core": "~6.7.0"
     },
     "autoload": {
         "psr-4": {

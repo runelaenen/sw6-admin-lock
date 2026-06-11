@@ -1,9 +1,7 @@
-{% block sw_customer_imitate_customer_modal_text %}
-    <sw-alert
-        variant="info"
-        :closable="false">
+{% block sw_customer_imitate_customer_modal_alert %}
+    <mt-banner variant="info">
         {{ $tc('lae-admin-lock.common.impersonationHint') }}
-    </sw-alert>
+    </mt-banner>
 
     {% parent %}
 {% endblock %}

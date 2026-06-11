@@ -296,9 +296,9 @@ Shopware.Mixin.register('laeAdminLock', {
             }
             const msg = this.laeLockState.ownedByCurrentUser
                 ? this.$tc('lae-admin-lock.common.lockedByCurrentUserOtherSession')
-                : this.$tc('lae-admin-lock.common.lockedByAnotherAdmin', 0, {
+                : this.$tc('lae-admin-lock.common.lockedByAnotherAdmin', {
                     owner: this.laeLockOwnerLabel,
-                });
+                }, 0);
             this.createNotificationWarning({ message: msg });
         },
 

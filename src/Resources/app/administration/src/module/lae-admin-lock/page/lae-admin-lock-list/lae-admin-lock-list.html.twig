@@ -9,12 +9,11 @@
 
     {% block lae_admin_lock_list_smart_bar_actions %}
         <template #smart-bar-actions>
-            <sw-button
-                variant="ghost"
-                :is-loading="isLoading"
+            <mt-button
+                :isLoading="isLoading"
                 @click="loadLocks(false)">
                 {{ $tc('lae-admin-lock.overview.refresh') }}
-            </sw-button>
+            </mt-button>
         </template>
     {% endblock %}
 
